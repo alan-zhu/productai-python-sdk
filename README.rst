@@ -95,6 +95,20 @@ Use other service
     api = cli.get_api(service_type, service_id)
     resp = api.query(image_url)
 
+e.g:
+
+.. code-block:: python
+
+    from productai import Client
+
+    access_key_id, access_key_secret = 'your access key', 'your secret'
+    image_url = 'an image url'
+    service_type, service_id = 'public', '_0000030'
+    cli = Client(access_key_id, access_key_secret)
+    api = cli.get_api(service_type, service_id)
+    resp = api.query(image_url)
+
+
 
 安装
 ----
@@ -173,6 +187,19 @@ Use other service
 
     from productai import Client
 
+    cli = Client(access_key_id, access_key_secret)
+    api = cli.get_api(service_type, service_id)
+    resp = api.query(image_url)
+
+例如: 
+
+.. code-block:: python
+
+    from productai import Client
+
+    access_key_id, access_key_secret = '你的 access key', '你的 secret'
+    image_url = '图片 url 地址'
+    service_type, service_id = 'public', '_0000030'
     cli = Client(access_key_id, access_key_secret)
     api = cli.get_api(service_type, service_id)
     resp = api.query(image_url)
