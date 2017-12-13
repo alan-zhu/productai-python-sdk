@@ -25,13 +25,15 @@ API_VERSION = '1'
 
 class Client(object):
 
-    def __init__(self, access_key_id, access_key_secret, session=None):
+    def __init__(self, access_key_id, access_key_secret,
+                 session=None, url_root=API_URL):
         self.access_key_id = access_key_id
         self.access_key_secret = access_key_secret
         if not session:
             session = get_default_session()
         self.session = session
         self.lang = 'en-us'
+        self.url_root = url_root
 
     def get_api(self, type_, id_):
         return API(self, type_, id_)
@@ -123,7 +125,6 @@ class API(object):
         self.client = client
         self.type_ = type_
         self.id_ = id_
-        self.url_root_ = API_URL
 
     def query(self, image, loc='0-0-1-1', count=20, tags=None, **kwargs):
         data = {
@@ -155,15 +156,7 @@ class API(object):
 
     @property
     def base_url(self):
-        return os.path.join(self.url_root, self.type_, self.id_)
-
-    @property
-    def url_root(self):
-        return self.url_root_
-
-    @url_root.setter
-    def url_root(self, value):
-        self.url_root_ = value
+        return os.path.join(self.client.url_root, self.type_, self.id_)
 
 
 class ColorAnalysisAPI(API):
